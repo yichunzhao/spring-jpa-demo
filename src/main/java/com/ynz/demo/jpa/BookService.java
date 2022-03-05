@@ -13,7 +13,7 @@ public class BookService {
   }
 
   public Book findBookByName(Long id) {
-    return bookRepository.findBookById(id)
+    return bookRepository.findById(id)
         .orElseThrow(
             () ->
                 new NoSuchElementException(

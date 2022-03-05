@@ -4,25 +4,22 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Import;
 
-import javax.persistence.EntityManagerFactory;
-
 @Import(JPAConfiguration.class)
 public class DemoJPA {
 
   public static void main(String[] args) {
     ApplicationContext context = new AnnotationConfigApplicationContext(JPAConfiguration.class);
-    printoutContextBeans(context);
+    var bookRepository = context.getBean(BookRepository.class);
+    var bookService = context.getBean(BookService.class);
 
-    var emf = context.getBean(EntityManagerFactory.class);
-    var em = emf.createEntityManager();
+    // persist a book
+    var book = new Book();
+    book.setName("Java functional programming");
 
-    System.out.printf("contains Person entity? %b%n", em.contains(Book.class));
-  }
+    bookRepository.save(book);
+    System.out.println("Persisted Book PK: " + book.getId());
 
-  private static void printoutContextBeans(ApplicationContext context) {
-    //
-    for (String name : context.getBeanDefinitionNames()) {
-      System.out.println(name);
-    }
+    var found = bookService.findBookByName(book.getId());
+    System.out.println("Found: " + found);
   }
 }

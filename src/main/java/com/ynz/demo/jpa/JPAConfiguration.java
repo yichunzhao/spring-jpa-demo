@@ -18,8 +18,8 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-//@EnableJpaRepositories
-@ComponentScan(basePackages = "com.ynz.demo.jpa")
+@EnableJpaRepositories
+@ComponentScan
 public class JPAConfiguration {
 
   @Bean
