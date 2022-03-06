@@ -1,4 +1,4 @@
-# spring-jpa-demo
+# Spring-JPA-Demo
 
 How to setup JPA-Hibernate with Spring DI, without SpringBoot
 
